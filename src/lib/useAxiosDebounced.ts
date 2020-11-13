@@ -15,7 +15,7 @@ function useAxiosDebounced<TOut>(wait?: number, config?: UseAxiosConfig): UseAxi
     const executeDebounced: AxiosDebouncedExecuteFunction = useDebounceCallback((param1: string | AxiosRequestConfig, param2?: AxiosRequestConfig) => {
         if (typeof param1 === "string")
             execute(param1, param2);
-        else execute(param2)
+        else execute(param1)
     }, wait, config.loadEagerly);
 
     return {

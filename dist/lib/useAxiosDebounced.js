@@ -22,7 +22,7 @@ function useAxiosDebounced(wait, config) {
         if (typeof param1 === "string")
             execute(param1, param2);
         else
-            execute(param2);
+            execute(param1);
     }, wait, config.loadEagerly);
     return __assign(__assign({}, useAxiosData), { executeDebounced: executeDebounced });
 }
