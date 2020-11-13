@@ -1,1 +1,1 @@
-{"version":3,"file":"useAxios.js","sourceRoot":"","sources":["../src/useAxios.ts"],"names":[],"mappings":"AAAA,OAAO,QAAQ,MAAM,cAAc,CAAC;AACpC,OAAO,iBAAiB,MAAM,uBAAuB,CAAC;AAEtD,OAAO,EACH,QAAQ,EACR,iBAAiB,EACpB,CAAA"}
+{"version":3,"file":"useAxios.js","sourceRoot":"","sources":["../src/useAxios.ts"],"names":[],"mappings":"AAAA,OAAO,QAAQ,MAAM,gBAAgB,CAAC;AACtC,OAAO,iBAAiB,MAAM,yBAAyB,CAAC;AAExD,OAAO,EACH,QAAQ,EACR,iBAAiB,EACpB,CAAA"}

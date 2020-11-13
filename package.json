@@ -1,6 +1,6 @@
 {
   "name": "hooks-for-axios",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "React hooks for Axios built using Typescript. With built-in for cancelation, lazy/eager loading, flexible configuration, and debouncing",
   "main": "dist/useAxios.js",
   "files": ["dist"],
