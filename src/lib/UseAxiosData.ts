@@ -8,7 +8,6 @@ export interface AxiosDebouncedExecuteFunction {
 
 export interface AxiosExecuteFunction<TOut> {
     (config: AxiosRequestConfig): AxiosPromise;
-
     (url: string, config?: AxiosRequestConfig): AxiosPromise<TOut>;
 }
 
