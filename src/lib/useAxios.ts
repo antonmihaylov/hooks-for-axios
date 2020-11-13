@@ -74,11 +74,20 @@ function useAxios<TOut>(config: UseAxiosConfig | undefined = undefined): UseAxio
         }
     }, [])
 
-    if (config.loadEagerly && config.defaultAxiosConfig) {
-        execute(config.defaultAxiosConfig)
-    } else if (config.loadEagerly && !config.defaultAxiosConfig) {
-        console.warn("useAxios warning: Eager loading is enabled, but no default axios configuration is provided. Data will not be loaded eagerly")
+    const firstTimeRender = useRef(true);
+
+    if (firstTimeRender.current) {
+        if (config.loadEagerly && config.defaultAxiosConfig) {
+            execute(config.defaultAxiosConfig)
+        } else if (config.loadEagerly && !config.defaultAxiosConfig) {
+            console.warn("useAxios warning: Eager loading is enabled, but no default axios configuration is provided. Data will not be loaded eagerly")
+        }
     }
+
+    useEffect(() => {
+        firstTimeRender.current = false;
+    })
+
 
     return {
         execute,

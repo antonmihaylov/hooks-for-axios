@@ -62,12 +62,18 @@ function useAxios(config) {
             (_a = cancelTokenSource.current) === null || _a === void 0 ? void 0 : _a.cancel();
         };
     }, []);
-    if (config.loadEagerly && config.defaultAxiosConfig) {
-        execute(config.defaultAxiosConfig);
+    var firstTimeRender = useRef(true);
+    if (firstTimeRender.current) {
+        if (config.loadEagerly && config.defaultAxiosConfig) {
+            execute(config.defaultAxiosConfig);
+        }
+        else if (config.loadEagerly && !config.defaultAxiosConfig) {
+            console.warn("useAxios warning: Eager loading is enabled, but no default axios configuration is provided. Data will not be loaded eagerly");
+        }
     }
-    else if (config.loadEagerly && !config.defaultAxiosConfig) {
-        console.warn("useAxios warning: Eager loading is enabled, but no default axios configuration is provided. Data will not be loaded eagerly");
-    }
+    useEffect(function () {
+        firstTimeRender.current = false;
+    });
     return {
         execute: execute,
         data: data,
