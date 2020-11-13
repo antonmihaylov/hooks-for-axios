@@ -1,7 +1,4 @@
 import useAxios from "lib/useAxios";
 import useAxiosDebounced from "lib/useAxiosDebounced";
-export default {
-    useAxios: useAxios,
-    useAxiosDebounced: useAxiosDebounced
-};
+export { useAxios, useAxiosDebounced };
 //# sourceMappingURL=useAxios.js.map
