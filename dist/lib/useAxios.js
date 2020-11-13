@@ -65,7 +65,7 @@ function useAxios(config) {
     if (config.loadEagerly && config.defaultAxiosConfig) {
         execute(config.defaultAxiosConfig);
     }
-    else if (!config.defaultAxiosConfig) {
+    else if (config.loadEagerly && !config.defaultAxiosConfig) {
         console.warn("useAxios warning: Eager loading is enabled, but no default axios configuration is provided. Data will not be loaded eagerly");
     }
     return {
