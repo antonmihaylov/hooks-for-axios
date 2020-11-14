@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import {AxiosExecuteFunction, UseAxiosData} from "lib/UseAxiosData";
-import Axios, {AxiosRequestConfig, CancelTokenSource} from "axios";
+import Axios, {AxiosRequestConfig, AxiosResponse, CancelTokenSource} from "axios";
 import {UseAxiosConfig} from "lib/UseAxiosConfig";
 
 /**
@@ -17,7 +17,7 @@ function useAxios<TOut>(config: UseAxiosConfig | undefined = undefined): UseAxio
 
     const cancelTokenSource = useRef<CancelTokenSource | undefined>(undefined);
 
-    const [data, setData] = useState<TOut | null>(null);
+    const [response, setResponse] = useState<AxiosResponse<TOut> | null>(null);
     const [error, setError] = useState<any | null>(null)
     const [isLoading, setIsLoading] = useState(false);
 
@@ -46,14 +46,14 @@ function useAxios<TOut>(config: UseAxiosConfig | undefined = undefined): UseAxio
 
         return config.axiosInstance(requestConfig)
             .then((r) => {
-                setData(r.data);
+                setResponse(r);
                 setError(null);
                 setIsLoading(false);
                 return r;
             }).catch((e) => {
                 setIsLoading(false);
                 if (!Axios.isCancel(e)) {
-                    setData(null);
+                    setResponse(null);
                     setError(e);
                 }
                 throw e; //Rethrow it so that we might do something with it down the line
@@ -91,7 +91,8 @@ function useAxios<TOut>(config: UseAxiosConfig | undefined = undefined): UseAxio
 
     return {
         execute,
-        data,
+        data: response && response.data ? response.data : null,
+        response,
         error,
         isLoading,
         cancel

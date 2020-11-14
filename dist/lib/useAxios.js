@@ -12,7 +12,7 @@ function useAxios(config) {
     if (!config.axiosInstance)
         config.axiosInstance = Axios;
     var cancelTokenSource = useRef(undefined);
-    var _a = useState(null), data = _a[0], setData = _a[1];
+    var _a = useState(null), response = _a[0], setResponse = _a[1];
     var _b = useState(null), error = _b[0], setError = _b[1];
     var _c = useState(false), isLoading = _c[0], setIsLoading = _c[1];
     /**
@@ -36,14 +36,14 @@ function useAxios(config) {
         requestConfig.cancelToken = cancelTokenSource.current.token;
         return config.axiosInstance(requestConfig)
             .then(function (r) {
-            setData(r.data);
+            setResponse(r);
             setError(null);
             setIsLoading(false);
             return r;
         }).catch(function (e) {
             setIsLoading(false);
             if (!Axios.isCancel(e)) {
-                setData(null);
+                setResponse(null);
                 setError(e);
             }
             throw e; //Rethrow it so that we might do something with it down the line
@@ -76,7 +76,8 @@ function useAxios(config) {
     });
     return {
         execute: execute,
-        data: data,
+        data: response && response.data ? response.data : null,
+        response: response,
         error: error,
         isLoading: isLoading,
         cancel: cancel

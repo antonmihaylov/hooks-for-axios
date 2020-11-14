@@ -82,7 +82,8 @@ import {useAxios, useAxiosDebounced} from hooks-for-axios;
 - `isLoading` - This gets changed every time the request state changes. If there is a request going on currently it is true.
 - `error` - This gets set when there is an error with the request. (cancelling does not affect it). Note that any errors (including cancellations) will still get thrown, so you can catch them from the promise returned from `execute()`. The error field gets reset on every request.
 - `cancel` - call this to cancel the last ongoing request, if any
-- `data` - this is the data you receive from axios (i.e. axiosResponse.data)
+- `data` - this is the data you receive from axios (i.e. response.data)
+- `response` - this is the response object. Use this if you want fine grained control over the response
 
 Examples:
 ```js

@@ -1,4 +1,4 @@
-import { AxiosPromise, AxiosRequestConfig } from "axios";
+import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from "axios";
 export interface AxiosDebouncedExecuteFunction {
     (config: AxiosRequestConfig): void;
     (url: string, config?: AxiosRequestConfig): void;
@@ -17,6 +17,7 @@ export interface UseAxiosData<TOut> {
     error: any | null;
     isLoading: boolean;
     cancel: (message?: string) => void;
+    response: AxiosResponse<TOut> | null;
 }
 export interface UseAxiosDebouncedData<TOut> extends UseAxiosData<TOut> {
     /**
