@@ -8,7 +8,7 @@ import {AxiosRequestConfig} from "axios";
  * @param wait The amount of time in ms you want to wait after the latest request before starting a new request
  * @param config
  */
-function useAxiosDebounced<TOut>(wait?: number, config?: UseAxiosConfig): UseAxiosDebouncedData<TOut> {
+function useAxiosDebounced<TOut>(wait?: number, config?: UseAxiosConfig<TOut>): UseAxiosDebouncedData<TOut> {
     const useAxiosData = useAxios<TOut>(config);
     const {execute} = useAxiosData;
 

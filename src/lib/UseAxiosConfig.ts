@@ -1,6 +1,6 @@
-import Axios, {AxiosInstance, AxiosRequestConfig} from "axios";
+import Axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
 
-export interface UseAxiosConfig {
+export interface UseAxiosConfig<TOut> {
     /** Provide a custom axios instance. If not set, the default {@link Axios} instance will be used */
     axiosInstance?: AxiosInstance;
 
@@ -15,4 +15,10 @@ export interface UseAxiosConfig {
 
     /** Set this to true to fetch a request right after rendering for the first time */
     loadEagerly?: boolean;
+
+    /** Will get called after each successful request */
+    callbackOnSuccess?: (response: AxiosResponse<TOut>) => void;
+    
+    /** Will get called after each unsuccessful request */
+    callbackOnError?: (e: any) => void;
 }

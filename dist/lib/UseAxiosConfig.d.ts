@@ -1,5 +1,5 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-export interface UseAxiosConfig {
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+export interface UseAxiosConfig<TOut> {
     /** Provide a custom axios instance. If not set, the default {@link Axios} instance will be used */
     axiosInstance?: AxiosInstance;
     /** If this is true when you call execute if there is an unfinished request it will get cancelled  */
@@ -11,4 +11,8 @@ export interface UseAxiosConfig {
     defaultAxiosConfig?: AxiosRequestConfig;
     /** Set this to true to fetch a request right after rendering for the first time */
     loadEagerly?: boolean;
+    /** Will get called after each successful request */
+    callbackOnSuccess?: (response: AxiosResponse<TOut>) => void;
+    /** Will get called after each unsuccessful request */
+    callbackOnError?: (e: any) => void;
 }

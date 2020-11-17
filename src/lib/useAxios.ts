@@ -7,7 +7,7 @@ import {UseAxiosConfig} from "lib/UseAxiosConfig";
  * Hooks up an axios instance to the component's state
  * @param {UseAxiosConfig} config the configuration for useAxios
  */
-function useAxios<TOut>(config: UseAxiosConfig | undefined = undefined): UseAxiosData<TOut> {
+function useAxios<TOut>(config: UseAxiosConfig<TOut> | undefined = undefined): UseAxiosData<TOut> {
     if (!config)
         config = {};
 
@@ -49,6 +49,8 @@ function useAxios<TOut>(config: UseAxiosConfig | undefined = undefined): UseAxio
                 setResponse(r);
                 setError(null);
                 setIsLoading(false);
+                if (config.callbackOnSuccess)
+                    config.callbackOnSuccess(r);
                 return r;
             }).catch((e) => {
                 setIsLoading(false);
@@ -56,6 +58,9 @@ function useAxios<TOut>(config: UseAxiosConfig | undefined = undefined): UseAxio
                     setResponse(null);
                     setError(e);
                 }
+
+                if (config.callbackOnError)
+                    config.callbackOnError(e);
                 throw e; //Rethrow it so that we might do something with it down the line
             });
     }

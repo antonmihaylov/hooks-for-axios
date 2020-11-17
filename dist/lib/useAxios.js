@@ -39,6 +39,8 @@ function useAxios(config) {
             setResponse(r);
             setError(null);
             setIsLoading(false);
+            if (config.callbackOnSuccess)
+                config.callbackOnSuccess(r);
             return r;
         }).catch(function (e) {
             setIsLoading(false);
@@ -46,6 +48,8 @@ function useAxios(config) {
                 setResponse(null);
                 setError(e);
             }
+            if (config.callbackOnError)
+                config.callbackOnError(e);
             throw e; //Rethrow it so that we might do something with it down the line
         });
     };
