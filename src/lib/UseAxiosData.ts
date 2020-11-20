@@ -1,5 +1,4 @@
-import {AxiosPromise, AxiosRequestConfig, AxiosResponse} from "axios";
-import useAxiosDebounced from "./useAxiosDebounced";
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from 'axios';
 
 export interface AxiosDebouncedExecuteFunction {
     (config: AxiosRequestConfig): void;

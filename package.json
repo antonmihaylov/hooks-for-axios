@@ -3,7 +3,10 @@
   "version": "1.0.10",
   "description": "React hooks for Axios built using Typescript. With built-in for cancelation, lazy/eager loading, flexible configuration, and debouncing",
   "main": "dist/useAxios.js",
-  "files": ["dist", "src"],
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "build": "tsc --declaration"
   },
@@ -40,6 +43,7 @@
     "@typescript-eslint/parser": "^4.7.0",
     "axios": "^0.21.0",
     "eslint": "^7.13.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "react": "^16.8",
     "terser-webpack-plugin": "^5.0.3",
     "ts-loader": "^8.0.11",

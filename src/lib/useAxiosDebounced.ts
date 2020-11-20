@@ -1,8 +1,8 @@
-import {useDebounceCallback} from "@react-hook/debounce";
-import {UseAxiosConfig} from "lib/UseAxiosConfig";
+import { useDebounceCallback } from "@react-hook/debounce";
+import { UseAxiosConfig } from "lib/UseAxiosConfig";
 import useAxios from "./useAxios";
-import {AxiosDebouncedExecuteFunction, UseAxiosDebouncedData} from "lib/UseAxiosData";
-import {AxiosRequestConfig} from "axios";
+import { UseAxiosDebouncedData, AxiosDebouncedExecuteFunction } from 'lib/UseAxiosData';
+import { AxiosRequestConfig } from "axios";
 
 /**
  * @param wait The amount of time in ms you want to wait after the latest request before starting a new request
@@ -10,7 +10,7 @@ import {AxiosRequestConfig} from "axios";
  */
 function useAxiosDebounced<TOut>(wait?: number, config?: UseAxiosConfig): UseAxiosDebouncedData<TOut> {
     const useAxiosData = useAxios<TOut>(config);
-    const {execute} = useAxiosData;
+    const { execute } = useAxiosData;
 
     const executeDebounced: AxiosDebouncedExecuteFunction = useDebounceCallback((param1: string | AxiosRequestConfig, param2?: AxiosRequestConfig) => {
         if (typeof param1 === "string")

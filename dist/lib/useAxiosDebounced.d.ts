@@ -1,5 +1,5 @@
 import { UseAxiosConfig } from "lib/UseAxiosConfig";
-import { UseAxiosDebouncedData } from "lib/UseAxiosData";
+import { UseAxiosDebouncedData } from 'lib/UseAxiosData';
 /**
  * @param wait The amount of time in ms you want to wait after the latest request before starting a new request
  * @param config

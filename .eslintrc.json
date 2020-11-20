@@ -12,8 +12,10 @@
     "sourceType": "module"
   },
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "react-hooks"
   ],
   "rules": {
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }
