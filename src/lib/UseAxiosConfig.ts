@@ -1,4 +1,4 @@
-import Axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
+import {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
 
 export interface UseAxiosConfig<TOut> {
     /** Provide a custom axios instance. If not set, the default {@link Axios} instance will be used */

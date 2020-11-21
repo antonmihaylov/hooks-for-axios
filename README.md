@@ -31,7 +31,7 @@ https://www.npmjs.com/package/hooks-for-axios
 ### Built With
 * [Typescript](https://www.typescriptlang.org/)
 * [React](https://reactjs.org/)
-* [React-hook debounce](@react-hook/debounce)
+* [React-hook debounce](https://www.npmjs.com/package/@react-hook/debounce)
 * [Axios](https://github.com/axios/axios)
 
 
@@ -161,4 +161,4 @@ Example:
     );
 ```
 
-The debouncing functionality is provided by [React-hook debounce](@react-hook/debounce). This just integrates it to use with axios and the useAxios hook.
+The debouncing functionality is provided by [React-hook debounce](https://www.npmjs.com/package/@react-hook/debounce). This just integrates it to use with axios and the useAxios hook.

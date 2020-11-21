@@ -10,7 +10,7 @@ import {AxiosRequestConfig} from "axios";
  */
 function useAxiosDebounced<TOut>(wait?: number, config?: UseAxiosConfig<TOut>): UseAxiosDebouncedData<TOut> {
     const useAxiosData = useAxios<TOut>(config);
-    const {execute} = useAxiosData;
+    const { execute } = useAxiosData;
 
     const executeDebounced: AxiosDebouncedExecuteFunction = useDebounceCallback((param1: string | AxiosRequestConfig, param2?: AxiosRequestConfig) => {
         if (typeof param1 === "string")

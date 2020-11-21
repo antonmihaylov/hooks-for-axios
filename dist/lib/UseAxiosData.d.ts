@@ -1,4 +1,4 @@
-import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from "axios";
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from 'axios';
 export interface AxiosDebouncedExecuteFunction {
     (config: AxiosRequestConfig): void;
     (url: string, config?: AxiosRequestConfig): void;
