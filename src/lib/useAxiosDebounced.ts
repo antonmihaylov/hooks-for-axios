@@ -1,7 +1,7 @@
 import {useDebounceCallback} from "@react-hook/debounce";
-import {UseAxiosConfig} from "lib/UseAxiosConfig";
+import {UseAxiosConfig} from "../lib/UseAxiosConfig";
 import useAxios from "./useAxios";
-import {AxiosDebouncedExecuteFunction, UseAxiosDebouncedData} from "lib/UseAxiosData";
+import {AxiosDebouncedExecuteFunction, UseAxiosDebouncedData} from "../lib/UseAxiosData";
 import {AxiosRequestConfig} from "axios";
 
 /**

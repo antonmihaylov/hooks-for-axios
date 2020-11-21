@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react";
-import {AxiosExecuteFunction, UseAxiosData} from "lib/UseAxiosData";
+import {AxiosExecuteFunction, UseAxiosData} from "../lib/UseAxiosData";
 import Axios, {AxiosRequestConfig, AxiosResponse, CancelTokenSource} from "axios";
-import {UseAxiosConfig} from "lib/UseAxiosConfig";
+import {UseAxiosConfig} from "../lib/UseAxiosConfig";
 
 /**
  * Hooks up an axios instance to the component's state
@@ -25,7 +25,7 @@ function useAxios<TOut>(config: UseAxiosConfig<TOut> | undefined = undefined): U
      * Executes an axios request with the given options
      * Takes in the same arguments as Axios()
      */
-    const execute: AxiosExecuteFunction<TOut> = (param1: string | AxiosRequestConfig, param2?: AxiosRequestConfig) => {
+    const execute: AxiosExecuteFunction<TOut> = async (param1: string | AxiosRequestConfig, param2?: AxiosRequestConfig) => {
         setIsLoading(true);
 
         let requestConfig: AxiosRequestConfig;
@@ -44,25 +44,25 @@ function useAxios<TOut>(config: UseAxiosConfig<TOut> | undefined = undefined): U
         cancelTokenSource.current = Axios.CancelToken.source();
         requestConfig.cancelToken = cancelTokenSource.current.token;
 
-        return config.axiosInstance(requestConfig)
-            .then((r) => {
-                setResponse(r);
-                setError(null);
-                setIsLoading(false);
-                if (config.callbackOnSuccess)
-                    config.callbackOnSuccess(r);
-                return r;
-            }).catch((e) => {
-                setIsLoading(false);
-                if (!Axios.isCancel(e)) {
-                    setResponse(null);
-                    setError(e);
-                }
+        try {
+            const r = await config.axiosInstance(requestConfig);
+            setResponse(r);
+            setError(null);
+            setIsLoading(false);
+            if (config.callbackOnSuccess)
+                config.callbackOnSuccess(r);
+            return r;
+        } catch (e) {
+            setIsLoading(false);
+            if (!Axios.isCancel(e)) {
+                setResponse(null);
+                setError(e);
+            }
 
-                if (config.callbackOnError)
-                    config.callbackOnError(e);
-                throw e; //Rethrow it so that we might do something with it down the line
-            });
+            if (config.callbackOnError)
+                config.callbackOnError(e);
+            throw e; //Rethrow it so that we might do something with it down the line
+        }
     }
 
     const cancel = (message?: string) => {
