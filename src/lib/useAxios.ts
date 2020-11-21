@@ -1,7 +1,7 @@
-import {useEffect, useRef, useState} from "react";
-import {AxiosExecuteFunction, UseAxiosData} from "../lib/UseAxiosData";
-import Axios, {AxiosRequestConfig, AxiosResponse, CancelTokenSource} from "axios";
-import {UseAxiosConfig} from "../lib/UseAxiosConfig";
+import { useEffect, useRef, useState } from "react";
+import { AxiosExecuteFunction, UseAxiosData } from "../lib/UseAxiosData";
+import Axios, { AxiosRequestConfig, AxiosResponse, CancelTokenSource } from "axios";
+import { UseAxiosConfig } from "../lib/UseAxiosConfig";
 
 /**
  * Hooks up an axios instance to the component's state
@@ -89,6 +89,14 @@ function useAxios<TOut>(config: UseAxiosConfig<TOut> | undefined = undefined): U
         }
     }
 
+    function reset(dontCancelRequests?: boolean) {
+        if (!dontCancelRequests)
+            cancel();
+        setResponse(undefined);
+        setError(undefined);
+        setIsLoading(false);
+    }
+
     useEffect(() => {
         firstTimeRender.current = false;
     })
@@ -100,7 +108,8 @@ function useAxios<TOut>(config: UseAxiosConfig<TOut> | undefined = undefined): U
         response,
         error,
         isLoading,
-        cancel
+        cancel,
+        reset
     }
 }
 

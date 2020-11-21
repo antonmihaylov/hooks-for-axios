@@ -21,6 +21,8 @@ export interface UseAxiosData<TOut> {
     isLoading: boolean;
     cancel: (message?: string) => void;
     response: AxiosResponse<TOut> | null;
+    /** Sets the response, data and error to undefined and cancels all current request (except if the dontCancelRequests param is true) */
+    reset: (dontCancelRequests?: boolean) => void;
 }
 
 export interface UseAxiosDebouncedData<TOut> extends UseAxiosData<TOut> {

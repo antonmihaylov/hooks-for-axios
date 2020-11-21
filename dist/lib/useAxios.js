@@ -122,6 +122,13 @@ function useAxios(config) {
             console.warn("useAxios warning: Eager loading is enabled, but no default axios configuration is provided. Data will not be loaded eagerly");
         }
     }
+    function reset(dontCancelRequests) {
+        if (!dontCancelRequests)
+            cancel();
+        setResponse(undefined);
+        setError(undefined);
+        setIsLoading(false);
+    }
     useEffect(function () {
         firstTimeRender.current = false;
     });
@@ -131,7 +138,8 @@ function useAxios(config) {
         response: response,
         error: error,
         isLoading: isLoading,
-        cancel: cancel
+        cancel: cancel,
+        reset: reset
     };
 }
 export default useAxios;
