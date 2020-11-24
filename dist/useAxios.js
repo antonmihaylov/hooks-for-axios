@@ -7,7 +7,7 @@
 		exports["useAxios"] = factory(require("react"), require("axios"));
 	else
 		root["useAxios"] = factory(root["react"], root["axios"]);
-})(self, function(__WEBPACK_EXTERNAL_MODULE__297__, __WEBPACK_EXTERNAL_MODULE__376__) {
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE__297__, __WEBPACK_EXTERNAL_MODULE__376__) {
 return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({

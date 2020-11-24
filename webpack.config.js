@@ -22,8 +22,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
-    library: 'useAxios',
-    libraryTarget: 'umd'
+    library: "useAxios",
+    libraryTarget: "umd",
+    globalObject: "typeof self !== 'undefined' ? self : this",
   },
   optimization: {
     minimize: true,
