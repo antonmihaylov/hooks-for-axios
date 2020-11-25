@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AxiosExecuteFunction, UseAxiosData } from "../lib/UseAxiosData";
 import Axios, { AxiosRequestConfig, AxiosResponse, CancelTokenSource } from "axios";
 import { UseAxiosConfig } from "../lib/UseAxiosConfig";
@@ -7,7 +7,11 @@ import { UseAxiosConfig } from "../lib/UseAxiosConfig";
  * Hooks up an axios instance to the component's state
  * @param {UseAxiosConfig} config the configuration for useAxios
  */
-function useAxios<TOut>(config: UseAxiosConfig<TOut> | undefined = undefined): UseAxiosData<TOut> {
+function useAxios<TOut>(initialConfig: UseAxiosConfig<TOut> | undefined = undefined): UseAxiosData<TOut> {
+    const configRef = useRef(initialConfig);
+
+    let config = configRef.current;
+
     if (!config)
         config = {};
 
@@ -25,7 +29,7 @@ function useAxios<TOut>(config: UseAxiosConfig<TOut> | undefined = undefined): U
      * Executes an axios request with the given options
      * Takes in the same arguments as Axios()
      */
-    const execute: AxiosExecuteFunction<TOut> = async (param1: string | AxiosRequestConfig, param2?: AxiosRequestConfig) => {
+    const execute: AxiosExecuteFunction<TOut> = useCallback(async (param1: string | AxiosRequestConfig, param2?: AxiosRequestConfig) => {
         setIsLoading(true);
 
         let requestConfig: AxiosRequestConfig;
@@ -63,7 +67,7 @@ function useAxios<TOut>(config: UseAxiosConfig<TOut> | undefined = undefined): U
                 config.callbackOnError(e);
             throw e; //Rethrow it so that we might do something with it down the line
         }
-    }
+    }, [config]);
 
     const cancel = (message?: string) => {
         if (cancelTokenSource.current) {

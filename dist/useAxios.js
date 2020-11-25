@@ -73,9 +73,11 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
  * Hooks up an axios instance to the component's state
  * @param {UseAxiosConfig} config the configuration for useAxios
  */
-function useAxios(config) {
+function useAxios(initialConfig) {
     var _this = this;
-    if (config === void 0) { config = undefined; }
+    if (initialConfig === void 0) { initialConfig = undefined; }
+    var configRef = (0,external_react_.useRef)(initialConfig);
+    var config = configRef.current;
     if (!config)
         config = {};
     //Set the default axios instance if a custom one hasn't been passed in
@@ -89,7 +91,7 @@ function useAxios(config) {
      * Executes an axios request with the given options
      * Takes in the same arguments as Axios()
      */
-    var execute = function (param1, param2) { return __awaiter(_this, void 0, void 0, function () {
+    var execute = (0,external_react_.useCallback)(function (param1, param2) { return __awaiter(_this, void 0, void 0, function () {
         var requestConfig, r, e_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -132,7 +134,7 @@ function useAxios(config) {
                 case 4: return [2 /*return*/];
             }
         });
-    }); };
+    }); }, [config]);
     var cancel = function (message) {
         if (cancelTokenSource.current) {
             cancelTokenSource.current.cancel(message);
