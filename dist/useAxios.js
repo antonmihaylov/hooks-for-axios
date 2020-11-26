@@ -148,15 +148,15 @@ function useAxios(initialConfig) {
             (_a = cancelTokenSource.current) === null || _a === void 0 ? void 0 : _a.cancel();
         };
     }, []);
-    var firstTimeRender = (0,external_react_.useRef)(true);
-    if (firstTimeRender.current) {
+    (0,external_react_.useEffect)(function () {
         if (config.loadEagerly && config.defaultAxiosConfig) {
             execute(config.defaultAxiosConfig);
         }
         else if (config.loadEagerly && !config.defaultAxiosConfig) {
             console.warn("useAxios warning: Eager loading is enabled, but no default axios configuration is provided. Data will not be loaded eagerly");
         }
-    }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     function reset(dontCancelRequests) {
         if (!dontCancelRequests)
             cancel();
@@ -164,9 +164,6 @@ function useAxios(initialConfig) {
         setError(undefined);
         setIsLoading(false);
     }
-    (0,external_react_.useEffect)(function () {
-        firstTimeRender.current = false;
-    });
     return {
         execute: execute,
         data: response && response.data ? response.data : null,

@@ -83,15 +83,15 @@ function useAxios<TOut>(initialConfig: UseAxiosConfig<TOut> | undefined = undefi
         }
     }, [])
 
-    const firstTimeRender = useRef(true);
 
-    if (firstTimeRender.current) {
+    useEffect(() => {
         if (config.loadEagerly && config.defaultAxiosConfig) {
             execute(config.defaultAxiosConfig)
         } else if (config.loadEagerly && !config.defaultAxiosConfig) {
             console.warn("useAxios warning: Eager loading is enabled, but no default axios configuration is provided. Data will not be loaded eagerly")
         }
-    }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     function reset(dontCancelRequests?: boolean) {
         if (!dontCancelRequests)
@@ -100,10 +100,6 @@ function useAxios<TOut>(initialConfig: UseAxiosConfig<TOut> | undefined = undefi
         setError(undefined);
         setIsLoading(false);
     }
-
-    useEffect(() => {
-        firstTimeRender.current = false;
-    })
 
 
     return {
